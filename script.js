@@ -62,3 +62,10 @@ tabs.forEach(tab => {
     filterDeals(category);
   });
 });
+// Close mobile nav after clicking a menu link
+document.querySelectorAll("#mobileNav a").forEach((a) => {
+  a.addEventListener("click", () => {
+    mobileNav.setAttribute("hidden", "");
+    hamburger.setAttribute("aria-expanded", "false");
+  })
+  
