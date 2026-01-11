@@ -20,7 +20,7 @@ body{
   background:
     radial-gradient(900px 520px at 20% 15%, rgba(61,130,255,.22), transparent 60%),
     radial-gradient(800px 500px at 85% 15%, rgba(47,107,255,.18), transparent 60%),
-    linear-gradient(180deg, var(--bg0), var(--bg1) 60%, #f6f8fc 60%, #f6f8fc 100%);
+    linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 72%, #f6f8fc 72%, #f6f
 }
 
 a{color:inherit; text-decoration:none}
