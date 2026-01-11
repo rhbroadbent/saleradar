@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SaleRadar.ai — Real Deals. No Noise.</title>
+  <meta name="description" content="SaleRadar scans major retailers and surfaces real, verified deals by category and discount." />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-row">
+      <a class="brand" href="#">
+        <span class="brand__dot" aria-hidden="true"></span>
+        <span class="brand__text">SaleRadar</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#" class="nav__link is-active">Home</a>
+        <a href="#deals" class="nav__link">Today’s Deals</a>
+        <a href="#retailers" class="nav__link">Retailers</a>
+        <a href="#categories" class="nav__link">Categories</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a class="btn btn-primary" href="#alerts">Get Deal Alerts</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-nav container" id="mobileNav" hidden>
+      <a href="#" class="nav__link is-active">Home</a>
+      <a href="#deals" class="nav__link">Today’s Deals</a>
+      <a href="#retailers" class="nav__link">Retailers</a>
+      <a href="#categories" class="nav__link">Categories</a>
+      <a class="btn btn-primary w-full" href="#alerts">Get Deal Alerts</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <p class="hero-kicker">All the sales. One simple view.</p>
+
+          <h1 class="hero-title">
+            Skip the hype.<br />
+            See the real best deals today.
+          </h1>
+
+          <p class="hero-sub">
+            We scan major retailers, categorize real discounts,
+            and rank deals by verified savings.
+          </p>
+
+          <form class="search-row" role="search" aria-label="Search deals">
+            <label class="sr-only" for="q">Search</label>
+            <input id="q" name="q" type="search" placeholder="Search products, brands, or retailers" />
+            <button class="btn btn-search" type="submit">Search</button>
+          </form>
+
+          <div class="chips" aria-label="Quick filters">
+            <button class="chip is-selected" type="button">Today Only</button>
+            <button class="chip" type="button">50% Off</button>
+            <button class="chip" type="button">Electronics</button>
+            <button class="chip" type="button">Home &amp; Kitchen</button>
+          </div>
+        </div>
+
+        <aside class="hero-right" aria-label="Live deal feed demo">
+          <div class="demo-card">
+            <div class="demo-title">Live Deal Feed (Demo)</div>
+
+            <div class="demo-item">
+              <div class="demo-item__top">
+                <div class="demo-brand">Best Buy</div>
+                <div class="demo-off">Up to<br /><strong>60% Off</strong></div>
+              </div>
+              <div class="demo-text">
+                Big Screen TV Event
+                <span>Verified discounts on 4K and OLED TVs</span>
+              </div>
+            </div>
+
+            <div class="demo-item">
+              <div class="demo-item__top">
+                <div class="demo-brand">Target</div>
+                <div class="demo-off"><strong>40% Off</strong></div>
+              </div>
+              <div class="demo-text">
+                Home Essentials Sale
+                <span>Storage, cleaning, and everyday essentials</span>
+              </div>
+            </div>
+
+            <div class="demo-item">
+              <div class="demo-item__top">
+                <div class="demo-brand">Macy’s</div>
+                <div class="demo-off">Extra<br /><strong>50% Off</strong></div>
+              </div>
+              <div class="demo-text">
+                Clearance Event
+                <span>Stackable codes on apparel and home clearance</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Categories / Tabs -->
+    <section id="categories" class="quickStart">
+      <div class="container">
+        <div class="quickStart__row">
+          <div class="quickStart__left">
+            <h2 class="quickStart__title">Start here</h2>
+            <p class="quickStart__sub">Pick a category, then browse top deals.</p>
+          </div>
+
+          <div class="quickStart__right">
+            <div class="tabs" role="tablist" aria-label="Top categories">
+              <button class="tab is-active" role="tab" aria-selected="true" data-category="all">All</button>
+              <button class="tab" role="tab" aria-selected="false" data-category="electronics">Electronics</button>
+              <button class="tab" role="tab" aria-selected="false" data-category="home">Home &amp; Kitchen</button>
+              <button class="tab" role="tab" aria-selected="false" data-category="fitness">Fitness</button>
+              <button class="tab" role="tab" aria-selected="false" data-category="travel">Travel</button>
+              <button class="tab" role="tab" aria-selected="false" data-category="apparel">Apparel</button>
+              <button class="tab" role="tab" aria-selected="false" data-category="tools">Tools</button>
+            </div>
+
+            <div class="vendors" aria-label="Retailers">
+              <a class="vendor" href="#retailers">Amazon</a>
+              <a class="vendor" href="#retailers">Best Buy</a>
+              <a class="vendor" href="#retailers">Target</a>
+              <a class="vendor" href="#retailers">Walmart</a>
+              <a class="vendor" href="#retailers">Costco</a>
+              <a class="vendor" href="#retailers">Home Depot</a>
+              <a class="vendor" href="#retailers">Lowe’s</a>
+              <a class="vendor" href="#retailers">Macy’s</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deals -->
+    <section id="deals" class="section light">
+      <div class="container">
+        <h2 class="section-title">Today’s Top Deals</h2>
+        <p class="section-sub">Ranked by highest verified savings across top retailers.</p>
+
+        <div class="cards-3">
+          <article class="deal-card" data-category="electronics">
+            <h3 class="deal-brand">Best Buy</h3>
+            <p class="deal-title">Big Screen TV Event</p>
+            <p class="deal-off">Up to <strong>50% Off</strong></p>
+            <p class="deal-desc">Verified discounts on 4K and OLED TVs. Prices checked hourly.</p>
+            <a class="deal-link" href="#">View Deals →</a>
+          </article>
+
+          <article class="deal-card" data-category="home">
+            <h3 class="deal-brand">Target</h3>
+            <p class="deal-title">Home Essentials Sale</p>
+            <p class="deal-off"><strong>40% Off</strong></p>
+            <p class="deal-desc">Storage, cleaning, and everyday essentials with real savings.</p>
+            <a class="deal-link" href="#">View Deals →</a>
+          </article>
+
+          <article class="deal-card" data-category="apparel">
+            <h3 class="deal-brand">Macy’s</h3>
+            <p class="deal-title">Extra Clearance Savings</p>
+            <p class="deal-off">Extra <strong>50%</strong></p>
+            <p class="deal-desc">Stackable codes on apparel and home clearance sections.</p>
+            <a class="deal-link" href="#">View Deals →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Retailers -->
+    <section id="retailers" class="section light">
+      <div class="container">
+        <h2 class="section-title">Browse Deals by Retailer</h2>
+        <p class="section-sub">Jump straight to the stores you care about most.</p>
+
+        <div class="retailer-grid">
+          <a class="retailer-pill" href="#"><span>Amazon</span><span class="chev">›</span></a>
+          <a class="retailer-pill" href="#"><span>Best Buy</span><span class="chev">›</span></a>
+          <a class="retailer-pill" href="#"><span>Target</span><span class="chev">›</span></a>
+          <a class="retailer-pill" href="#"><span>Walmart</span><span class="chev">›</span></a>
+          <a class="retailer-pill" href="#"><span>Costco</span><span class="chev">›</span></a>
+          <a class="retailer-pill" href="#"><span>Home Depot</span><span class="chev">›</span></a>
+          <a class="retailer-pill" href="#"><span>Lowe’s</span><span class="chev">›</span></a>
+          <a class="retailer-pill" href="#"><span>Macy’s</span><span class="chev">›</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alerts -->
+    <section id="alerts" class="section light footer-cta">
+      <div class="container cta-row">
+        <div>
+          <h2 class="section-title">Get Deal Alerts</h2>
+          <p class="section-sub">One email field. No drama. Unsubscribe anytime.</p>
+        </div>
+
+        <form class="alert-form" id="alertForm">
+          <label class="sr-only" for="email">Email</label>
+          <input id="email" type="email" placeholder="you@example.com" required />
+          <button class="btn btn-primary" type="submit">Join</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <div class="footer-left">
+        <div class="brand brand--footer">
+          <span class="brand__dot" aria-hidden="true"></span>
+          <span class="brand__text">SaleRadar</span>
+        </div>
+        <p class="fine">© <span id="year"></span> SaleRadar.ai — Affiliate links may earn commission.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#">Home</a>
+        <a href="#deals">Today’s Deals</a>
+        <a href="#retailers">Retailers</a>
+        <a href="#categories">Categories</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
