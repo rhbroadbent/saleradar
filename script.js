@@ -1,102 +1,76 @@
-// Mobile nav toggle
+// Footer year
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Demo: prevent forms from reloading
+document.querySelectorAll("form").forEach((f) => {
+  f.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert("Demo only — wire this to email service later.");
+  });
+});
+
+// Mobile menu (reliable)
 const hamburger = document.getElementById("hamburger");
 const mobileNav = document.getElementById("mobileNav");
 
 function closeMobileNav() {
-  if (!mobileNav || !hamburger) return;
+  if (!hamburger || !mobileNav) return;
   mobileNav.setAttribute("hidden", "");
   hamburger.setAttribute("aria-expanded", "false");
 }
 
-function openMobileNav() {
-  if (!mobileNav || !hamburger) return;
-  mobileNav.removeAttribute("hidden");
-  hamburger.setAttribute("aria-expanded", "true");
-}
-
-function isNavOpen() {
-  return mobileNav && !mobileNav.hasAttribute("hidden");
+function toggleMobileNav() {
+  if (!hamburger || !mobileNav) return;
+  const open = !mobileNav.hasAttribute("hidden");
+  if (open) closeMobileNav();
+  else {
+    mobileNav.removeAttribute("hidden");
+    hamburger.setAttribute("aria-expanded", "true");
+  }
 }
 
 if (hamburger && mobileNav) {
-  // Toggle open/close
   hamburger.addEventListener("click", (e) => {
     e.stopPropagation();
-    if (isNavOpen()) closeMobileNav();
-    else openMobileNav();
+    toggleMobileNav();
   });
 
-  // Close when clicking any menu link
   mobileNav.querySelectorAll("a").forEach((a) => {
     a.addEventListener("click", () => closeMobileNav());
   });
 
-  // Close when clicking anywhere outside
   document.addEventListener("click", (e) => {
-    if (!isNavOpen()) return;
-    const clickedInsideMenu = mobileNav.contains(e.target);
-    const clickedHamburger = hamburger.contains(e.target);
-    if (!clickedInsideMenu && !clickedHamburger) closeMobileNav();
+    const open = !mobileNav.hasAttribute("hidden");
+    if (!open) return;
+    if (!mobileNav.contains(e.target) && !hamburger.contains(e.target)) closeMobileNav();
   });
 
-  // Close on Escape (desktop)
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeMobileNav();
-    }
   });
 }
 
-// Footer year
-document.getElementById("year").textContent = new Date().getFullYear();
-
-// Prevent forms from reloading (demo)
-document.querySelectorAll("form").forEach((f) => {
-  f.addEventListener("submit", (e) => {
-    e.preventDefault();
-    alert("Demo only — wire this to Beehiiv/Mailchimp later.");
-  });
-});
-
-// Chip selection (demo)
-document.querySelectorAll(".chip").forEach((chip) => {
-  chip.addEventListener("click", () => {
-    document.querySelectorAll(".chip").forEach(c => c.classList.remove("is-selected"));
-    chip.classList.add("is-selected");
-  });
-});
-
-// Category tabs filter (functional demo)
+// Tabs filter (Today’s top deals)
 const tabs = document.querySelectorAll(".tab");
-const dealCards = document.querySelectorAll(".deal-card");
+const deals = document.querySelectorAll(".deal");
 
-function setActiveTab(tabEl) {
-  tabs.forEach(t => {
-    t.classList.remove("is-active");
-    t.setAttribute("aria-selected", "false");
-  });
-  tabEl.classList.add("is-active");
-  tabEl.setAttribute("aria-selected", "true");
+function setActive(tab) {
+  tabs.forEach(t => t.classList.remove("is-active"));
+  tab.classList.add("is-active");
 }
 
-function filterDeals(category) {
-  dealCards.forEach(card => {
-    const c = card.getAttribute("data-category") || "all";
-    const show = (category === "all") || (c === category);
-    card.classList.toggle("is-hidden", !show);
+function filterDeals(cat) {
+  deals.forEach(d => {
+    const c = d.getAttribute("data-category");
+    const show = (cat === "all") || (c === cat);
+    d.style.display = show ? "block" : "none";
   });
 }
 
 tabs.forEach(tab => {
   tab.addEventListener("click", () => {
-    const category = tab.getAttribute("data-category") || "all";
-    setActiveTab(tab);
-    filterDeals(category);
+    const cat = tab.getAttribute("data-category");
+    setActive(tab);
+    filterDeals(cat);
   });
 });
-// Close mobile nav after clicking a menu link
-document.querySelectorAll("#mobileNav a").forEach((a) => {
-  a.addEventListener("click", () => {
-    mobileNav.setAttribute("hidden", "");
-    hamburger.setAttribute("aria-expanded", "false");
-  })
-  
