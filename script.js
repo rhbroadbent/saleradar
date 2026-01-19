@@ -1,7 +1,6 @@
-// Footer year
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Prevent demo forms from reloading the page
+// Demo forms
 document.querySelectorAll("form").forEach((f) => {
   f.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -9,7 +8,7 @@ document.querySelectorAll("form").forEach((f) => {
   });
 });
 
-// Mobile menu (reliable)
+// Mobile menu
 const hamburger = document.getElementById("hamburger");
 const mobileNav = document.getElementById("mobileNav");
 
