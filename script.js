@@ -1,11 +1,11 @@
 // Footer year
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Demo: prevent forms from reloading
+// Prevent demo forms from reloading the page
 document.querySelectorAll("form").forEach((f) => {
   f.addEventListener("submit", (e) => {
     e.preventDefault();
-    alert("Demo only — wire this to email service later.");
+    alert("Demo only — wire this to an email service later.");
   });
 });
 

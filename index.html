@@ -11,14 +11,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="./styles.css?v=1" />
+  <!-- Cache-bust to avoid iPad/Vercel asset caching -->
+  <link rel="stylesheet" href="./styles.css?v=12" />
 </head>
 
 <body>
-  <header class="topbar">
+  <header class="topbar" id="top">
     <div class="container topbar__row">
       <a class="brand" href="#top" aria-label="SaleRadar home">
-        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__mark" aria-hidden="true">
+          <!-- Radar Orb + Sweep (header-optimized) -->
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="14" cy="14" r="11" stroke="#2F6BFF" stroke-width="2.25"/>
+            <circle cx="14" cy="14" r="6.4" stroke="rgba(47,107,255,.22)" stroke-width="1.5"/>
+            <path d="M14 3 A11 11 0 0 1 24.5 14" stroke="#2F6BFF" stroke-width="2.75" stroke-linecap="round"/>
+            <circle cx="22.2" cy="14" r="2.45" fill="#39FFD1"/>
+          </svg>
+        </span>
+
         <span class="brand__name">SaleRadar</span>
         <span class="brand__dotai">.ai</span>
       </a>
@@ -40,7 +50,8 @@
       </div>
     </div>
 
-    <div class="mobilemenu container" id="mobileNav" hidden>
+    <!-- Mobile dropdown -->
+    <div class="container mobilemenu" id="mobileNav" hidden>
       <a class="mobilemenu__link" href="#how">How it works</a>
       <a class="mobilemenu__link" href="#deals">Today’s top</a>
       <a class="mobilemenu__link" href="#retailers">Retailers</a>
@@ -49,7 +60,7 @@
     </div>
   </header>
 
-  <main id="top">
+  <main>
     <!-- HERO -->
     <section class="hero">
       <div class="container hero__grid">
@@ -69,7 +80,7 @@
             SaleRadar scans major retailers, verifies price drops, and ranks the best discounts by store and category—so you can buy smarter, faster.
           </p>
 
-          <form class="search" role="search" aria-label="Search deals">
+          <form class="search" role="search" aria-label="Search deals" id="searchForm">
             <label class="sr-only" for="q">Search</label>
             <input id="q" name="q" type="search" placeholder="Search products, brands, or retailers" autocomplete="off" />
             <button class="btn btn--primary" type="submit">Search</button>
@@ -82,11 +93,11 @@
           </div>
 
           <div class="chips" aria-label="Quick filters">
-            <button class="chip is-on" type="button" data-filter="today">Today</button>
-            <button class="chip" type="button" data-filter="50">50%+</button>
-            <button class="chip" type="button" data-filter="electronics">Electronics</button>
-            <button class="chip" type="button" data-filter="home">Home</button>
-            <button class="chip" type="button" data-filter="travel">Travel</button>
+            <button class="chip is-on" type="button">Today</button>
+            <button class="chip" type="button">50%+</button>
+            <button class="chip" type="button">Electronics</button>
+            <button class="chip" type="button">Home</button>
+            <button class="chip" type="button">Travel</button>
           </div>
         </div>
 
@@ -103,7 +114,7 @@
             </div>
 
             <div class="feed">
-              <article class="feedcard" data-cat="electronics">
+              <article class="feedcard">
                 <div class="feedcard__top">
                   <div class="feedcard__brand">Best Buy</div>
                   <div class="feedcard__badge">Up to <strong>60%</strong></div>
@@ -112,7 +123,7 @@
                 <div class="feedcard__desc">Verified discounts on 4K + OLED TVs.</div>
               </article>
 
-              <article class="feedcard" data-cat="home">
+              <article class="feedcard">
                 <div class="feedcard__top">
                   <div class="feedcard__brand">Target</div>
                   <div class="feedcard__badge"><strong>40%</strong></div>
@@ -121,13 +132,13 @@
                 <div class="feedcard__desc">Storage, cleaning, everyday must-haves.</div>
               </article>
 
-              <article class="feedcard" data-cat="apparel">
+              <article class="feedcard">
                 <div class="feedcard__top">
                   <div class="feedcard__brand">Macy’s</div>
                   <div class="feedcard__badge">Extra <strong>50%</strong></div>
                 </div>
-                <div class="feedcard__title">Clearance Event</div>
-                <div class="feedcard__desc">Stackable codes on apparel + home.</div>
+                <div class="feedcard__title">Clearance + Codes</div>
+                <div class="feedcard__desc">Stackable codes on apparel and home.</div>
               </article>
 
               <div class="panel__footer">
@@ -143,7 +154,10 @@
       </div>
     </section>
 
-    <!-- HOW IT WORKS -->
+    <!-- DARK→LIGHT TRANSITION BAND (FIX) -->
+    <section class="transition" aria-hidden="true"></section>
+
+    <!-- HOW IT WORKS (DARK SURFACE) -->
     <section id="how" class="section section--dark">
       <div class="container">
         <div class="section__head">
@@ -171,7 +185,7 @@
       </div>
     </section>
 
-    <!-- TOP DEALS -->
+    <!-- TODAY'S TOP (LIGHT SURFACE) -->
     <section id="deals" class="section section--light">
       <div class="container">
         <div class="section__head">
@@ -211,21 +225,19 @@
           </article>
         </div>
 
-        <div class="categorybar">
-          <button class="tab is-active" data-category="all">All</button>
-          <button class="tab" data-category="electronics">Electronics</button>
-          <button class="tab" data-category="home">Home</button>
-          <button class="tab" data-category="travel">Travel</button>
-          <button class="tab" data-category="apparel">Apparel</button>
-          <button class="tab" data-category="tools">Tools</button>
+        <div class="categorybar" aria-label="Category tabs">
+          <button class="tab is-active" data-category="all" type="button">All</button>
+          <button class="tab" data-category="electronics" type="button">Electronics</button>
+          <button class="tab" data-category="home" type="button">Home</button>
+          <button class="tab" data-category="travel" type="button">Travel</button>
+          <button class="tab" data-category="apparel" type="button">Apparel</button>
+          <button class="tab" data-category="tools" type="button">Tools</button>
         </div>
       </div>
     </section>
 
-    <!-- RETAILERS -->
-<section id="retailers" class="section section--dark section--retailers">
-  ...
-    </section>
+    <!-- RETAILERS (FORCED DARK SURFACE, READABLE) -->
+    <section id="retailers" class="section section--retailers">
       <div class="container">
         <div class="section__head">
           <h2>Browse by retailer</h2>
@@ -245,7 +257,7 @@
       </div>
     </section>
 
-    <!-- ALERTS -->
+    <!-- ALERTS (LIGHT SURFACE) -->
     <section id="alerts" class="section section--light">
       <div class="container cta">
         <div>
@@ -266,7 +278,14 @@
     <div class="container footer__row">
       <div class="footer__left">
         <div class="footer__brand">
-          <span class="brand__mark" aria-hidden="true"></span>
+          <span class="brand__mark" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="14" cy="14" r="11" stroke="#2F6BFF" stroke-width="2.25"/>
+              <circle cx="14" cy="14" r="6.4" stroke="rgba(47,107,255,.22)" stroke-width="1.5"/>
+              <path d="M14 3 A11 11 0 0 1 24.5 14" stroke="#2F6BFF" stroke-width="2.75" stroke-linecap="round"/>
+              <circle cx="22.2" cy="14" r="2.45" fill="#39FFD1"/>
+            </svg>
+          </span>
           <strong>SaleRadar</strong><span class="brand__dotai">.ai</span>
         </div>
         <div class="fineprint">© <span id="year"></span> SaleRadar.ai — Affiliate links may earn commission.</div>
@@ -281,6 +300,6 @@
     </div>
   </footer>
 
-  <script src="./script.js?v=1"></script>
+  <script src="./script.js?v=12"></script>
 </body>
 </html>

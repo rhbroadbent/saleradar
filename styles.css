@@ -5,16 +5,13 @@
   --muted:rgba(234,242,255,.72);
   --line:rgba(255,255,255,.10);
 
-  --card: rgba(255,255,255,.06);
-  --card2: rgba(7,19,39,.55);
-
   --blue:#2f6bff;
   --blue2:#49a3ff;
-  --pink:#ff4fd8;
   --mint:#39ffd1;
 
   --shadow: 0 22px 60px rgba(0,0,0,.45);
   --max: 1120px;
+  --light:#f6f8fc;
 }
 
 *{ box-sizing:border-box; }
@@ -23,11 +20,17 @@ body{
   margin:0;
   font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   color: var(--ink);
+
+  /* FIX: smoother dark-to-light, no harsh seam on iPad sizes */
   background:
     radial-gradient(900px 520px at 18% 12%, rgba(73,163,255,.22), transparent 60%),
-    radial-gradient(900px 520px at 78% 10%, rgba(255,79,216,.12), transparent 60%),
-    radial-gradient(700px 420px at 80% 55%, rgba(57,255,209,.10), transparent 60%),
-    linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 70%, #f6f8fc 70%, #f6f8fc 100%);
+    radial-gradient(900px 520px at 78% 10%, rgba(47,107,255,.16), transparent 60%),
+    linear-gradient(180deg,
+      var(--bg0) 0%,
+      var(--bg1) 74%,
+      rgba(246,248,252,.88) 78%,
+      var(--light) 100%
+    );
 }
 
 a{ color:inherit; text-decoration:none; }
@@ -55,9 +58,7 @@ a{ color:inherit; text-decoration:none; }
   background: linear-gradient(180deg, var(--blue2), var(--blue));
   box-shadow: 0 14px 30px rgba(47,107,255,.28);
 }
-.btn--ghost{
-  background: rgba(255,255,255,.03);
-}
+.btn--ghost{ background: rgba(255,255,255,.03); }
 .w-full{ width:100%; }
 
 /* Topbar */
@@ -76,18 +77,18 @@ a{ color:inherit; text-decoration:none; }
   padding: 14px 0;
   gap: 16px;
 }
+
 .brand{
   display:flex; align-items:center; gap:10px;
   font-weight: 900;
   letter-spacing: .2px;
 }
 .brand__mark{
-  width: 18px; height: 18px; border-radius: 999px;
-  background: conic-gradient(from 180deg, var(--mint), var(--pink), var(--blue), var(--mint));
-  box-shadow: 0 0 0 6px rgba(255,255,255,.05);
+  width: 28px; height: 28px;
+  display:inline-flex; align-items:center; justify-content:center;
 }
 .brand__name{ font-size: 18px; }
-.brand__dotai{ color: rgba(234,242,255,.72); font-weight: 900; }
+.brand__dotai{ color: rgba(234,242,255,.70); font-weight: 900; margin-left: 2px; }
 
 .nav{
   display:flex; align-items:center; gap:22px;
@@ -113,11 +114,7 @@ a{ color:inherit; text-decoration:none; }
   background: rgba(234,242,255,.9);
 }
 
-/* Mobile menu overlay */
-.mobilemenu{
-  position: relative;
-  padding-bottom: 14px;
-}
+/* Mobile menu */
 .mobilemenu[hidden]{ display:none; }
 .mobilemenu{
   margin: 0 auto 14px;
@@ -138,13 +135,14 @@ a{ color:inherit; text-decoration:none; }
 }
 
 /* Hero */
-.hero{ padding: 44px 0 34px; }
+.hero{ padding: 44px 0 18px; }
 .hero__grid{
   display:grid;
   grid-template-columns: 1.05fr .95fr;
   gap: 28px;
   align-items: start;
 }
+
 .pill{
   display:inline-flex; align-items:center; gap:10px;
   padding: 10px 12px;
@@ -309,6 +307,12 @@ a{ color:inherit; text-decoration:none; }
   z-index: -1;
 }
 
+/* Transition band (prevents seam) */
+.transition{
+  height: 54px;
+  background: linear-gradient(180deg, rgba(7,26,53,0) 0%, rgba(7,26,53,.85) 45%, rgba(246,248,252,1) 100%);
+}
+
 /* Sections */
 .section{ padding: 56px 0; }
 .section__head{ margin-bottom: 18px; }
@@ -316,16 +320,19 @@ a{ color:inherit; text-decoration:none; }
 .section__head p{ margin: 10px 0 0; font-weight: 700; }
 
 .section--dark{
-  color: var(--ink);
-  padding-top: 30px;
+  background: linear-gradient(180deg, rgba(6,18,39,.88) 0%, rgba(7,26,53,.88) 100%);
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
 }
 .section--dark .section__head p{ color: rgba(234,242,255,.68); }
+
 .section--light{
-  background: #f6f8fc;
+  background: var(--light);
   color: #0f172a;
 }
 .section--light .section__head p{ color: rgba(15,23,42,.68); }
 
+/* How steps */
 .steps{
   display:grid;
   grid-template-columns: repeat(3, 1fr);
@@ -348,6 +355,7 @@ a{ color:inherit; text-decoration:none; }
 .step__t{ margin-top: 12px; font-weight: 900; font-size: 16px; }
 .step__d{ margin-top: 8px; color: rgba(234,242,255,.70); font-weight: 650; line-height: 1.45; }
 
+/* Deals */
 .dealgrid{
   display:grid;
   grid-template-columns: repeat(3, 1fr);
@@ -390,6 +398,15 @@ a{ color:inherit; text-decoration:none; }
   color: #0f172a;
 }
 
+/* Retailers (forced readable dark surface) */
+.section--retailers{
+  background: linear-gradient(180deg, rgba(6,18,39,.96) 0%, rgba(7,26,53,.96) 100%);
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.section--retailers .section__head h2{ color: rgba(234,242,255,.96); }
+.section--retailers .section__head p{ color: rgba(234,242,255,.72); }
+
 .retgrid{
   display:grid;
   grid-template-columns: repeat(4, 1fr);
@@ -399,12 +416,14 @@ a{ color:inherit; text-decoration:none; }
   display:flex; align-items:center; justify-content:space-between;
   padding: 14px 16px;
   border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
   font-weight: 900;
+  color: rgba(234,242,255,.92);
 }
-.ret span{ color: rgba(234,242,255,.55); font-size: 18px; }
+.ret span{ color: rgba(234,242,255,.60); font-size: 18px; }
 
+/* CTA */
 .cta{
   display:flex; align-items:center; justify-content:space-between;
   gap: 16px;
@@ -427,7 +446,7 @@ a{ color:inherit; text-decoration:none; }
 
 /* Footer */
 .footer{
-  background:#f6f8fc;
+  background: var(--light);
   border-top: 1px solid rgba(15,23,42,.08);
   padding: 22px 0;
   color:#0f172a;
@@ -455,31 +474,4 @@ a{ color:inherit; text-decoration:none; }
 @media (max-width: 860px){
   .nav{ display:none; }
   .hamburger{ display:inline-block; }
-
-  /* FORCE Browse-by-retailer section to be readable (fix washed-out middle) */
-.section--retailers{
-  background: linear-gradient(180deg, rgba(6,18,39,.96) 0%, rgba(7,26,53,.96) 100%);
-  color: rgba(234,242,255,.92);
-  border-top: 1px solid rgba(255,255,255,.06);
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
-
-.section--retailers .section__head h2{
-  color: rgba(234,242,255,.96);
-}
-
-.section--retailers .section__head p{
-  color: rgba(234,242,255,.72);
-}
-
-/* Retailer cards in that section */
-.section--retailers .ret{
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.12);
-  color: rgba(234,242,255,.92);
-}
-
-.section--retailers .ret span{
-  color: rgba(234,242,255,.60);
-}
 }
